@@ -100,8 +100,10 @@ Entry *get(HashTable **hash, char *key) {
 	pthread_mutex_lock(&(*hash)->lock);
 	Entry *entry = (*hash)->table[index];
 
-	if(entry == NULL)
+	if(entry == NULL) {
+		pthread_mutex_unlock(&(*hash)->lock);
 		return NULL;
+	}
 
 	while(strcmp(entry->key, key) != 0 && entry->next != NULL) {
 		entry = entry->next;
