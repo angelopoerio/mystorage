@@ -21,7 +21,9 @@ QUIT - quit the current session
 # Populate with a lot of key/value pairs
 
 Look at stress.py for an useful example. Do not open a new connection to insert a new key/value pair,
-just use one and issue the command many times in the current session. 
+just use one and issue the command many times in the current session. This is to avoid the overhead of
+opening too many connections that will cause the server to block. Use the same strategy for the other commands 
+(GET/LIST/DEL) 
 
 
 # Author & Notes
