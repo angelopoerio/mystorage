@@ -16,6 +16,7 @@ DEL key - delete the key
 
 LIST - list all the keys
 
+QUIT - quit the current session
 
 # Author & Notes
   Written by Angelo Poerio <angelo.poerio@gmail.com>
