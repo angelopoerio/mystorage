@@ -18,6 +18,12 @@ LIST - list all the keys
 
 QUIT - quit the current session
 
+# Populate with a lot of key/value pairs
+
+Look at stress.py for an useful example. Do not open a new connection to insert a new key/value pair,
+just use one and issue the command many times in the current session. 
+
+
 # Author & Notes
   Written by Angelo Poerio <angelo.poerio@gmail.com>
 
