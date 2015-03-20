@@ -20,5 +20,5 @@ except socket.error:
 
 for i in range(int(sys.argv[2])):
 	s.send("PUT {0}{1} 1\n".format(sys.argv[1], str(i)))
-	sleep(0.1)
+	sleep(0.01)
 s.close()

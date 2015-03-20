@@ -2,15 +2,30 @@
 
 void *connection_handler(void *socket)
 {
-	int connfd = *(int *)socket, ret;
+	int connfd = *(int *)socket;
 	char msg[500];
 	int retval;
+	fd_set sdset;
+	struct timeval tv;
+
+	tv.tv_sec = 120; /* 2 minutes timeout */
+	tv.tv_usec = 0;
 
 	do {
     	bzero(msg, 500);
-    	retval = read(connfd, msg, 500);
-		if(retval <= 0)
-		    break;
+		FD_ZERO(&sdset);
+		FD_SET(connfd, &sdset);
+		
+		if (select(connfd+1, &sdset, NULL, NULL, &tv) > 0)
+		{
+			retval = read(connfd, msg, 500);
+			if(retval <= 0)
+		    	break;
+		}
+
+		else {
+			break;
+		}
     } while(parseCmd(connfd, msg));
     	
     close(connfd);
@@ -61,7 +76,7 @@ int parseCmd(int fd, char *cmd) {
 		}
 
 		else {
-			get(&hash, key);
+			entry = get(&hash, key);
 
 			if(entry == NULL) {
 				send(fd, "doesn't exist\n",14,0);
