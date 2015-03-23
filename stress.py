@@ -22,5 +22,4 @@ for i in range(int(sys.argv[2])):
 	s.send("PUT {0}{1} 1\n".format(sys.argv[1], str(i)))
 	s.send("GET {0}{1}\n".format(sys.argv[1],str(i)))
 	print s.recv(100)
-	sleep(0.01)
 s.close()
