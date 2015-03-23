@@ -12,7 +12,7 @@ void *connection_handler(void *socket)
 	tv.tv_usec = 0;
 
 	do {
-    	bzero(msg, 500);
+    		bzero(msg, 500);
 		FD_ZERO(&sdset);
 		FD_SET(connfd, &sdset);
 		
@@ -20,13 +20,13 @@ void *connection_handler(void *socket)
 		{
 			retval = read(connfd, msg, 500);
 			if(retval <= 0)
-		    	break;
+		    		break;
 		}
 
 		else {
 			break;
 		}
-    } while(parseCmd(connfd, msg));
+    	} while(parseCmd(connfd, msg));
     	
     close(connfd);
     pthread_exit(0);
@@ -39,7 +39,6 @@ void mytrim(char *str) {
 		if(str[i] == '\r' || str[i] == '\n')
 		{
 			str[i] = '\0';
-			break;
 		}
 	}
 }
