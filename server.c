@@ -3,8 +3,8 @@
 void *connection_handler(void *socket)
 {
 	int connfd = *(int *)socket;
-	char msg[500];
-	int retval;
+	char msg[500], c = 0;
+	int retval,cnt = 0;
 	fd_set sdset;
 	struct timeval tv;
 
@@ -12,21 +12,39 @@ void *connection_handler(void *socket)
 	tv.tv_usec = 0;
 
 	do {
-    		bzero(msg, 500);
+    	bzero(msg, 500);
 		FD_ZERO(&sdset);
 		FD_SET(connfd, &sdset);
 		
 		if (select(connfd+1, &sdset, NULL, NULL, &tv) > 0)
 		{
-			retval = read(connfd, msg, 500);
-			if(retval <= 0)
+			cnt = 0;
+			c = 0;
+			
+			do 
+			{
+				if(cnt > 500) 
+					break;
+				
+				retval = read(connfd, &c, 1);
+				
+				if(retval <= 0)
 		    		break;
+		    	
+		    	msg[cnt] = c;
+		    	cnt++;
+ 		    
+ 		    }while(c != '\n');
+		
+ 		    msg[cnt] = '\n';
+
 		}
 
 		else {
 			break;
 		}
-    	} while(parseCmd(connfd, msg));
+    	
+    } while(parseCmd(connfd, msg));
     	
     close(connfd);
     pthread_exit(0);
