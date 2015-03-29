@@ -55,7 +55,7 @@ int parseCmd(int fd, char *cmd) {
 	mytrim(value);
 	mytrim(op);
 	mytrim(key);
-	
+
 	if(strcasecmp(op,"QUIT") == 0)
 		return 0;
 
