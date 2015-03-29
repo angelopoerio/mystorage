@@ -20,7 +20,7 @@ except socket.error:
 
 for i in range(int(sys.argv[2])):
 	key_name = "{0}{1}".format(sys.argv[1], str(i))
-	s.send("PUT {0} 1\n".format(key_name))
+	s.send("PUT {0} {1}\n".format(key_name,str(i)))
 	s.send("GET {0}\n".format(key_name))
 	print s.recv(100)
 s.close()
