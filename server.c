@@ -12,7 +12,7 @@ void *connection_handler(void *socket)
 	tv.tv_usec = 0;
 
 	do {
-    	bzero(msg, 500);
+    		bzero(msg, 500);
 		FD_ZERO(&sdset);
 		FD_SET(connfd, &sdset);
 		
@@ -29,22 +29,20 @@ void *connection_handler(void *socket)
 				retval = read(connfd, &c, 1);
 				
 				if(retval <= 0)
-		    		break;
+		    			break;
 		    	
-		    	msg[cnt] = c;
-		    	cnt++;
+		    		msg[cnt] = c;
+		    		cnt++;
  		    
- 		    }while(c != '\n');
-		
+ 		    	}while(c != '\n');
  		    msg[cnt] = '\n';
-
 		}
 
 		else {
 			break;
 		}
     	
-    } while(parseCmd(connfd, msg));
+    	} while(parseCmd(connfd, msg));
     	
     close(connfd);
     pthread_exit(0);
