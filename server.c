@@ -8,7 +8,7 @@ void *connection_handler(void *socket)
 	fd_set sdset;
 	struct timeval tv;
 
-	tv.tv_sec = 120; /* 2 minutes timeout */
+	tv.tv_sec = 60 * 10; /* 10 minutes timeout */
 	tv.tv_usec = 0;
 
 	do {
@@ -128,6 +128,7 @@ int parseCmd(int fd, char *cmd) {
 			}
 		}
 		pthread_mutex_unlock(&hash->lock);
+		send(fd, "END_LIST\n",9,0);
 	}
 
 	return 1;
