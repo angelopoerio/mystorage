@@ -25,6 +25,9 @@ just use one and issue the command many times in the current session. This is to
 opening too many connections that will cause the server to block. Use the same strategy for the other commands 
 (GET/LIST/DEL) 
 
+# Library
+
+Look at pydriver for a simple Python library to access the storage
 
 # Author & Notes
   Written by Angelo Poerio <angelo.poerio@gmail.com>
