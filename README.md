@@ -31,9 +31,12 @@ Look at pydriver for a simple Python library to access the storage
 
 # Docker container with all the setup
   How to use:
+
+```bash
   cd docker
   sudo docker build -t mystorage .
   sudo docker run -p 7777:7777 mystorage
+```
   You should get a mystorage instance up and running in the container listening on the right port
 
 # Author & Notes
